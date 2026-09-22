@@ -1,5 +1,41 @@
 # 신성오 202630112
 ## 9월 17일 (3주차)
+###
+
+kakao = ["가나", "다라", "마바", "사아","자차"]
+print(kakao)
+kakao.append(None)
+print(kakao)
+kakao[5] = kakao[4]
+kakao[4] = None
+print(kakao)
+kakao[4] = kakao[3]
+kakao[3] = None
+print(kakao)
+kakao[3] = "삽입"
+print(kakao)
+kakao[3] = None
+print(kakao)
+kakao[3] = kakao[4]
+kakao[4] = None
+print(kakao)
+kakao[4] = kakao[5]
+kakao[5] = None
+print(kakao)
+
+kakao = ["가나", "다라", "마바", "사아","자차"]
+temp = kakap[4]
+print(kakao)
+kakao.append("삽입")
+print(kakao)
+kakao[4] = kakao[5]
+kakao[5] = temp
+temp = kakao[3]
+print(kakao)
+kakao[3] = kakao[4]
+kakao[4] = temp
+print(kakao)
+
 # 9월10일 (2주차)
 # h1 태그
 ## h2 태그
