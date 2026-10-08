@@ -1,5 +1,93 @@
 # 신성오 202630112
 
+# 10 08일(5주차)
+## 단순 연결 리스트의 일반 구현,응용
+### 노드(Node) 클래스 정의
+class Node:
+    def __init__(self):
+        self.data = None
+        self.link = None
+### 연결 리스트 순회 및 출력 함수 (printNodes)
+### is not None = != None
+def printNodes(start_node):
+    current = start_node
+
+    if current == None:
+        return
+
+    print(current.data, end=' ')
+
+    while current.link != None: # is not Node = ! = Node
+        current = current.link
+        print(current.data, end=' ')
+
+    print()
+### 노드 삽입 함수 (inserNone)
+def inserNone(findData, inserData):
+    global memory, head, current, pre
+    current = head
+    
+### 첫 번째 노드(head) 데이터가 찾는 데이터와 일치할 경우 (맨 앞 삽입)
+    if current.data == findData:
+        node = Node()
+        node.data = inserData
+        node.link = head
+        head = node
+        return
+
+### 전역 변수 선언 및 메인 실행부 (__main__)
+# 전역 변수 선언
+memory = []
+head, current, pre = None, None, None
+dataArray = ['다현', '정연', '쯔위', '사나', '지효']
+
+
+if __name__ == "__main__":
+
+### 첫 번째 노드 생성 및 head 지정
+    node = Node()
+    node.data = dataArray[0]
+    head = node
+    memory.append(node)
+
+### 반복문과 배열을 이용한 전체 노드 생성 및 연결
+    for data in dataArray[1:]:
+        pre = node
+        node = Node()
+
+        node.data = data
+        pre.link = node
+        memory.append(node)
+
+### 전체 리스트 출력
+    printNodes(head)
+
+### 노드 삽입 테스트
+    inserNone("다현", "화사")
+    printNodes(head)
+    inserNone("사나", "다현")
+    printNodes(head)
+    inserNone("재남", "문별")
+    printNodes(head)
+
+### 리스트를 순회하며 중간 노드 탐색
+    while current.link != None:
+        pre = current
+        current = current.link
+        if current.data == findData:
+            # (학습 참고: 원본 코드의 node = None() 오타 및 중간 삽입 로직 디버깅 필요 영역)
+            node = Node() 
+            node.data = inserData
+            node.link = head 
+            head = node
+            return
+
+### 리스트 끝까지 탐색했으나 찾는 데이터가 없는 경우 (맨 뒤에 추가)
+    node = Node()
+    node.data = inserData
+    current.link = node
+
+
 # 10월 01일(4주차)
 ## 선형 리스트 활용
 9월 24일 (4주차)
