@@ -1,4 +1,219 @@
 # 신성오 202630112
+## 10월 29일
+
+## 10월 29일
+
+### 1. 스택(Stack)의 개념
+
+스택은 데이터를 차곡차곡 쌓는 자료구조이다.
+**LIFO(Last In, First Out)** 구조로, 마지막에 넣은 데이터가 가장 먼저 나온다.
+
+- `Push`: 데이터를 스택에 추가
+- `Pop`: 스택의 가장 위에 있는 데이터 삭제
+- `Peek`: 가장 위에 있는 데이터 확인
+- `top`: 스택의 가장 위에 있는 데이터 위치
+
+### 2. 스택 초기화 함수
+
+스택의 크기를 지정하고 데이터를 저장할 공간을 만든다.
+`top`을 `-1`로 설정하여 스택이 비어 있음을 나타낸다.
+
+```python
+def init_stack(size):
+    global stack, top
+    stack = [None] * size
+    top = -1
+```
+
+- `global stack, top`: 함수 밖의 변수를 사용
+- `[None] * size`: 지정한 크기만큼 스택 생성
+- `top = -1`: 스택이 비어 있는 상태
+
+### 3. Push 함수
+
+스택에 새로운 데이터를 추가한다.
+스택이 가득 찼는지 확인한 뒤 `top`을 증가시키고 데이터를 저장한다.
+
+```python
+def push(data):
+    global top
+    if is_stack_full():
+        return print("스택이 가득 찼습니다")
+    else:
+        top += 1
+        stack[top] = data
+        return print("Push된 데이터: " + str(data) + ", 현재 top: " + str(top))
+```
+
+- `is_stack_full()`: 스택이 가득 찼는지 확인
+- `top += 1`: 데이터가 들어갈 위치로 이동
+- `stack[top] = data`: 해당 위치에 데이터 저장
+
+### 4. Pop 함수
+
+스택의 가장 위에 있는 데이터를 삭제한다.
+데이터를 변수에 저장하고 해당 위치를 비운 뒤 `top`을 감소시킨다.
+
+```python
+def pop():
+    global top
+    if is_stack_empty():
+        return print("스택이 비어 있습니다")
+    else:
+        data = stack[top]
+        stack[top] = None
+        top -= 1
+        return print("Pop된 데이터: " + str(data) + ", 현재 top: " + str(top))
+```
+
+- `is_stack_empty()`: 스택이 비어 있는지 확인
+- `data = stack[top]`: 가장 위의 데이터 저장
+- `stack[top] = None`: 해당 위치 비우기
+- `top -= 1`: 이전 위치로 이동
+
+### 5. 스택 가득 참 확인 함수
+
+`top`이 스택의 마지막 인덱스와 같으면 스택이 가득 찬 상태이다.
+
+```python
+def is_stack_full():
+    global top
+    if top == len(stack) - 1:
+        return True
+    else:
+        return False
+```
+
+- `len(stack)`: 스택의 전체 크기
+- `len(stack) - 1`: 마지막 인덱스
+- `return True`: 스택이 가득 찬 상태
+- `return False`: 아직 공간이 남은 상태
+
+### 6. 스택 비어 있음 확인 함수
+
+`top`이 `-1`이면 스택에 데이터가 없는 상태이다.
+
+```python
+def is_stack_empty():
+    global top
+    if top == -1:
+        return True
+    else:
+        return False
+```
+
+- `top == -1`: 스택이 비어 있는지 확인
+- `return True`: 비어 있음
+- `return False`: 데이터가 있음
+
+### 7. Peek 함수
+
+스택에서 데이터를 삭제하지 않고 가장 위에 있는 데이터를 확인한다.
+
+```python
+def peek():
+    global top
+    if is_stack_empty():
+        return print("스택이 비어 있습니다. peek 불가")
+    else:
+        data = stack[top]
+        return print("Peek된 데이터: " + str(data) + ", 현재 top: " + str(top))
+```
+
+- `data = stack[top]`: 가장 위에 있는 데이터 확인
+- `Pop`과 달리 `top`을 변경하거나 데이터를 삭제하지 않는다.
+- 스택이 비어 있으면 데이터를 확인할 수 없다.
+
+### 8. 스택 상태 출력 함수
+
+스택의 데이터를 위에서 아래 방향으로 출력한다.
+`range()`의 시작값과 증가 방향을 조절해 마지막 인덱스부터 반복한다.
+
+```python
+def print_stack():
+    print("=== 스택 상태 ===")
+    for i in range(len(stack) - 1, -1, -1):
+        print(stack[i])
+    print("=================")
+```
+
+- `len(stack) - 1`: 마지막 인덱스부터 시작
+- `-1`: 반복이 끝나는 기준값으로, 실제 반복에는 포함되지 않음
+- `-1`의 간격: 인덱스를 1씩 감소
+- `stack[i]`: 해당 위치의 데이터 출력
+
+### 9. 스택 초기화하기
+
+`init_stack()` 함수를 호출해 스택의 크기를 지정한다.
+
+```python
+init_stack(7)
+
+print_stack()
+```
+
+- `init_stack(7)`: 크기가 7인 스택 생성
+- `print_stack()`: 현재 스택 상태 확인
+
+### 10. 데이터 Push 하기
+
+`push()` 함수를 이용해 스택에 데이터를 차례대로 추가한다.
+스택의 크기를 초과해 데이터를 추가하면 가득 찼다는 메시지를 표시한다.
+
+```python
+push("커피")
+push("녹차")
+push("꿀물")
+push("레몬차")
+push("밀크티")
+push("오렌지주스")
+push("아이스티")
+
+push("콜라")
+
+print_stack()
+```
+
+- 데이터를 추가할 때마다 `top`이 1씩 증가한다.
+- 스택의 크기가 7이면 최대 7개의 데이터를 저장할 수 있다.
+- 가득 찬 상태에서 추가하면 `Push`가 실행되지 않는다.
+
+### 11. 데이터 Pop 하기
+
+`pop()` 함수를 호출해 가장 위에 있는 데이터를 차례대로 삭제한다.
+스택이 비어 있으면 더 이상 데이터를 삭제할 수 없다.
+
+```python
+pop()
+pop()
+pop()
+pop()
+pop()
+pop()
+pop()
+
+pop()
+
+peek()
+
+print_stack()
+```
+
+- `pop()`: 가장 위에 있는 데이터 삭제
+- 스택이 비어 있을 때 `pop()`을 호출하면 삭제하지 않는다.
+- `peek()`: 데이터 삭제 없이 가장 위의 데이터 확인
+- `print_stack()`: 현재 스택 상태 출력
+
+### 핵심 정리
+
+- 스택은 LIFO 구조로, 마지막에 들어온 데이터가 먼저 나간다.
+- `Push`는 데이터를 추가하고 `Pop`은 데이터를 삭제한다.
+- `Peek`는 데이터를 삭제하지 않고 확인한다.
+- `top = -1`이면 스택이 비어 있다.
+- `top == len(stack) - 1`이면 스택이 가득 찬 상태이다.
+- 스택의 크기를 초과하거나 비어 있는 상태에서 작업하지 않도록 확인 함수가 필요하다.
+
+
 ## 10월 15일
 
 ### 1. 원형 연결 리스트의 개념
@@ -344,6 +559,9 @@ pre.link = current.link
 - `head`는 첫 번째 노드를 가리킨다.
 - 삽입과 삭제는 데이터 이동이 아니라 링크 변경으로 처리한다.
 - 원형 구조는 처음 노드로 돌아왔는지 확인해 반복을 종료한다.
+
+
+
 # 10 08일(5주차)
 ## 단순 연결 리스트의 일반 구현,응용
 ### 노드(Node) 클래스 정의
