@@ -1,5 +1,127 @@
 # 신성오 202630112
 
+## 11월 12일
+
+### 1. 이진 트리(Binary Tree)의 개념
+
+이진 트리는 하나의 노드가 최대 두 개의 자식 노드를 가질 수 있는 자료구조이다.
+
+각 노드는 왼쪽과 오른쪽으로 연결되며, 계층적인 구조를 가진다.
+
+- `data`: 노드에 저장되는 데이터
+- `left`: 왼쪽 자식 노드를 가리키는 변수
+- `right`: 오른쪽 자식 노드를 가리키는 변수
+- `root`: 트리의 가장 위에 있는 첫 번째 노드
+
+### 2. 트리 노드 클래스 만들기
+
+노드에 데이터를 저장하고 왼쪽과 오른쪽 자식 노드를 연결하기 위해 클래스를 만든다.
+
+```python
+class tree_node:
+    def __init__(self):
+        self.data = None
+        self.left = None
+        self.right = None
+```
+
+- `__init__()`: 객체 생성 시 실행되는 초기화 메서드
+- `self.data`: 노드에 저장할 데이터
+- `self.left`: 왼쪽 자식 노드
+- `self.right`: 오른쪽 자식 노드
+- `None`: 아직 연결된 노드가 없는 상태
+
+### 3. 루트 노드 생성하기
+
+트리의 가장 위에 있는 노드를 생성하고 데이터를 저장한다.
+이 노드를 기준으로 다른 노드들을 연결한다.
+
+```python
+node1 = tree_node()
+node1.data = "커피"
+```
+
+- `node1 = tree_node()`: 새로운 노드 생성
+- `node1.data = "커피"`: 노드에 데이터 저장
+- `node1`: 트리의 루트 노드
+
+### 4. 왼쪽과 오른쪽 자식 노드 연결하기
+
+루트 노드에 왼쪽과 오른쪽 자식 노드를 각각 연결한다.
+
+```python
+node2 = tree_node()
+node2.data = "우유"
+node1.left = node2
+
+node3 = tree_node()
+node3.data = "주스"
+node1.right = node3
+```
+
+- `node1.left = node2`: 루트 노드의 왼쪽에 우유 연결
+- `node1.right = node3`: 루트 노드의 오른쪽에 주스 연결
+- `left`와 `right`를 이용해 자식 노드를 구분한다.
+
+### 5. 하위 노드 추가하기
+
+기존 자식 노드에도 왼쪽과 오른쪽 자식 노드를 연결할 수 있다.
+이 과정을 반복하여 트리 구조를 확장한다.
+
+```python
+node4 = tree_node()
+node4.data = "물"
+node2.left = node4
+
+node5 = tree_node()
+node5.data = "콜라"
+node2.right = node5
+
+node6 = tree_node()
+node6.data = "사이다"
+node3.left = node6
+```
+
+- `node2.left = node4`: 우유 노드의 왼쪽에 물 연결
+- `node2.right = node5`: 우유 노드의 오른쪽에 콜라 연결
+- `node3.left = node6`: 주스 노드의 왼쪽에 사이다 연결
+
+### 6. 이진 트리 구조 출력하기
+
+각 노드의 `data`, `left`, `right`를 이용해 연결된 데이터를 확인한다.
+
+```python
+print("=== 이진 트리 구조 ===")
+print(node1.data, end=" ")
+print()
+
+print(node1.left.data, node1.right.data, end=" ")
+print()
+
+print(node1.left.left.data, node1.left.right.data, node1.right.left.data)
+```
+
+- `node1.data`: 루트 노드의 데이터
+- `node1.left.data`: 왼쪽 자식 노드의 데이터
+- `node1.right.data`: 오른쪽 자식 노드의 데이터
+- `node1.left.left.data`: 왼쪽 자식의 왼쪽 노드 데이터
+- `node1.left.right.data`: 왼쪽 자식의 오른쪽 노드 데이터
+- `node1.right.left.data`: 오른쪽 자식의 왼쪽 노드 데이터
+
+### 7. 이진 트리 핵심 정리
+
+- 이진 트리는 하나의 노드가 최대 두 개의 자식 노드를 가진다.
+- `root`는 트리의 가장 위에 있는 노드이다.
+- `left`는 왼쪽 자식 노드를 가리킨다.
+- `right`는 오른쪽 자식 노드를 가리킨다.
+- `data`에는 각 노드의 데이터가 저장된다.
+- 노드를 연결하여 계층적인 트리 구조를 만든다.
+
+
+
+
+
+
 ## 11월 5일
 
 ### 1. 큐(Queue)의 개념
