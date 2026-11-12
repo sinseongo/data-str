@@ -1,5 +1,207 @@
 # 신성오 202630112
-## 10월 29일
+
+## 11월 5일
+
+### 1. 큐(Queue)의 개념
+
+큐(Queue)는 데이터를 순서대로 저장하고 꺼내는 자료구조이다.
+**FIFO(First In, First Out)** 구조로, 먼저 들어온 데이터가 먼저 나간다.
+
+- `Enqueue`: 데이터를 큐에 추가
+- `Dequeue`: 큐의 가장 앞에 있는 데이터 삭제
+- `Peek`: 삭제하지 않고 가장 앞에 있는 데이터 확인
+- `front`: 데이터를 꺼낼 위치를 나타내는 변수
+- `rear`: 마지막으로 데이터가 들어간 위치를 나타내는 변수
+
+### 2. 큐 초기화 함수
+
+큐의 크기를 지정하고 데이터를 저장할 공간을 만든다.
+`front`와 `rear`를 `-1`로 설정하여 큐가 비어 있는 상태로 초기화한다.
+
+```python
+def init_queue(size):
+    global print_q, front, rear
+    print_q = [None] * size
+    front = -1
+    rear = -1
+    return print("큐 초기화 완료! 큐의 크기: " + str(size))
+```
+
+- `global print_q, front, rear`: 함수 밖의 변수 사용
+- `[None] * size`: 지정한 크기만큼 큐 생성
+- `front = -1`: 데이터를 꺼낼 위치 초기화
+- `rear = -1`: 데이터가 들어갈 위치 초기화
+
+### 3. Enqueue 함수
+
+큐의 뒤쪽에 새로운 데이터를 추가한다.
+큐가 가득 찼는지 확인한 뒤 `rear`를 증가시키고 데이터를 저장한다.
+
+```python
+def enqueue(data):
+    global rear
+    if is_queue_full():
+        return print("큐가 가득 찼습니다")
+    else:
+        rear += 1
+        print_q[rear] = data
+        return print("현재 rear:" + str(rear))
+```
+
+- `is_queue_full()`: 큐가 가득 찼는지 확인
+- `rear += 1`: 데이터가 들어갈 다음 위치로 이동
+- `print_q[rear] = data`: 해당 위치에 데이터 저장
+
+### 4. Dequeue 함수
+
+큐의 앞쪽에 있는 데이터를 꺼낸다.
+`front`를 증가시키고 해당 위치의 데이터를 가져온 다음 공간을 비운다.
+
+```python
+def dequeue():
+    global front, temp
+    if is_queue_empty():
+        return print("큐가 비어 있습니다! 삭제할 데이터가 없습니다")
+    front += 1
+    temp = print_q[front]
+    print_q[front] = None
+    return temp
+```
+
+- `is_queue_empty()`: 큐가 비어 있는지 확인
+- `front += 1`: 데이터를 꺼낼 위치로 이동
+- `temp = print_q[front]`: 삭제할 데이터 저장
+- `print_q[front] = None`: 해당 위치 비우기
+- `return temp`: 꺼낸 데이터 반환
+
+### 5. Peek 함수
+
+큐에서 데이터를 삭제하지 않고 가장 앞에 있는 데이터를 확인한다.
+
+```python
+def peek():
+    global front
+    if is_queue_empty():
+        return print("큐가 비어 있습니다! peek 불가")
+    else:
+        temp = print_q[front + 1]
+        return temp
+```
+
+- `is_queue_empty()`: 큐가 비어 있는지 확인
+- `print_q[front + 1]`: 가장 앞에 있는 데이터 확인
+- `return temp`: 확인한 데이터 반환
+
+`Peek`는 데이터를 삭제하지 않으므로 `front`의 위치가 변경되지 않는다.
+
+### 6. 큐 비어 있음 확인 함수
+
+`front`와 `rear`의 값이 같으면 큐가 비어 있는 상태이다.
+
+```python
+def is_queue_empty():
+    global front, rear
+    if front == rear:
+        return True
+    else:
+        return False
+```
+
+- `front == rear`: 큐가 비어 있는지 확인
+- `return True`: 큐가 비어 있음
+- `return False`: 큐에 데이터가 있음
+
+### 7. 큐 가득 참 확인 함수
+
+`rear`가 큐의 마지막 인덱스와 같으면 큐가 가득 찬 상태이다.
+
+```python
+def is_queue_full():
+    global rear
+    if rear == len(print_q) - 1:
+        return True
+    else:
+        return False
+```
+
+- `len(print_q)`: 큐의 전체 크기
+- `len(print_q) - 1`: 마지막 인덱스
+- `return True`: 큐가 가득 참
+- `return False`: 큐에 공간이 남아 있음
+
+### 8. 큐 상태 출력 함수
+
+큐에 저장된 데이터와 `front`, `rear`의 위치를 확인한다.
+
+```python
+def print_queue():
+    print("=== 큐 상태 ===")
+    print("큐의 크기: " + str(len(print_q)))
+    for i in range(len(print_q)):
+        print(print_q[i])
+    print("현재 front: " + str(front))
+    print("현재 rear: " + str(rear))
+    print("=================")
+```
+
+- `len(print_q)`: 큐의 전체 크기 확인
+- `range(len(print_q))`: 처음부터 마지막 위치까지 반복
+- `print_q[i]`: 각 위치의 데이터 출력
+- `front`, `rear`: 현재 데이터의 앞과 뒤 위치 확인
+
+### 9. 큐 초기화 및 데이터 추가하기
+
+`init_queue()` 함수로 큐의 크기를 지정한 뒤 `enqueue()`를 이용해 데이터를 추가한다.
+
+```python
+init_queue(5)
+
+enqueue("커피")
+enqueue("녹차")
+enqueue("꿀물")
+enqueue("물")
+enqueue("주스")
+```
+
+- `init_queue(5)`: 크기가 5인 큐 생성
+- `enqueue()`: 큐의 뒤쪽에 데이터 추가
+- 데이터가 추가될 때마다 `rear`가 1씩 증가한다.
+
+### 10. Peek 함수와 큐 상태 확인하기
+
+`peek()`를 사용해 가장 앞에 있는 데이터를 확인한다.
+데이터를 삭제하지 않기 때문에 큐의 위치는 그대로 유지된다.
+
+```python
+print("==========peek() 함수 호출 전==========")
+print(peek())
+print("==========peek() 함수 호출 후==========")
+
+print_queue()
+```
+
+- `peek()`: 가장 앞에 있는 데이터 확인
+- `print_queue()`: 현재 큐의 데이터와 위치 출력
+- `Peek`는 데이터 삭제 없이 확인만 수행한다.
+
+### 핵심 정리
+
+- 큐는 FIFO 구조로, 먼저 들어온 데이터가 먼저 나간다.
+- `Enqueue`는 데이터를 뒤쪽에 추가한다.
+- `Dequeue`는 앞쪽의 데이터를 꺼낸다.
+- `Peek`는 데이터를 삭제하지 않고 확인한다.
+- `front == rear`이면 큐가 비어 있는 상태이다.
+- `rear == len(print_q) - 1`이면 큐가 가득 찬 상태이다.
+- 현재 코드는 앞에서부터 순서대로 사용하는 선형 큐 구조이다.
+
+
+
+
+
+
+
+
+
 
 ## 10월 29일
 
