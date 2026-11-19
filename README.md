@@ -1,5 +1,105 @@
 # 신성오 202630112
 
+## 11월 19일
+
+### 1. 그래프(Graph)의 기본 개념
+그래프는 정점(Vertex)과 간선(Edge)으로 구성된 자료구조이다.
+정점 사이의 연결 관계를 표현할 때 사용한다.
+
+- 정점(Vertex) : 데이터를 나타내는 요소
+- 간선(Edge) : 정점 사이의 연결 관계
+
+### 2. 그래프 클래스 선언
+그래프의 크기를 지정하고, 인접 행렬을 생성한다.
+
+```python
+class graph():
+    def __init__(self, size):
+        self.SIZE = size
+        self.graph = [[0 for _ in range(size)] for _ in range(size)]
+```
+
+- `SIZE` : 그래프의 정점 개수
+- `graph` : 정점 사이의 연결 정보를 저장하는 2차원 리스트
+- `0` : 연결되지 않은 상태
+- `1` : 연결된 상태
+
+### 3. 그래프 정보 출력
+2차원 리스트에 저장된 연결 정보를 행과 열로 출력한다.
+
+```python
+def print_graph(graph):
+    print("=== " + graph + " 그래프 정보 출력===")
+    for row in range(graph.SIZE):
+        for col in range(graph.SIZE):
+            print(graph.graph[row][col], end=" ")
+        print()
+```
+
+- `row` : 행 번호
+- `col` : 열 번호
+- `end=" "` : 같은 줄에 이어서 출력
+- `print()` : 한 행 출력 후 줄 바꿈
+
+### 4. G1 그래프 생성
+크기가 4인 그래프를 만들고, 각 정점의 연결 관계를 1로 표시한다.
+
+```python
+G1, G3 = None, None
+
+G1 = graph(4)
+G1.graph[0][1] = 1
+G1.graph[0][2] = 1
+G1.graph[0][3] = 1
+G1.graph[1][0] = 1
+G1.graph[1][2] = 1
+G1.graph[2][0] = 1
+G1.graph[2][1] = 1
+G1.graph[2][3] = 1
+G1.graph[3][0] = 1
+G1.graph[3][2] = 1
+
+print_graph(G1)
+```
+
+- `graph(4)` : 정점 4개를 가진 그래프 생성
+- `G1.graph[행][열] = 1` : 해당 정점 사이의 연결 표시
+- `G1`은 양쪽 방향의 연결이 모두 표시되어 있다.
+
+### 5. G3 그래프 생성
+G3도 크기가 4인 그래프이며, 지정한 방향으로 연결 정보를 저장한다.
+
+```python
+G3 = graph(4)
+G3.graph[0][1] = 1
+G3.graph[0][2] = 1
+G3.graph[3][0] = 1
+G3.graph[3][2] = 1
+
+print("=== G3 무방향 그래프 ===")
+for row in range(G3.SIZE):
+    for col in range(G3.SIZE):
+        print(G3.graph[row][col], end=" ")
+    print()
+```
+
+- `G3` : 새로운 그래프 객체 생성
+- 지정한 위치에 `1`을 넣어 연결 관계 표현
+- 행과 열을 반복하여 인접 행렬 출력
+
+### 6. 인접 행렬(Adjacency Matrix)
+인접 행렬은 정점 사이의 연결 관계를 2차원 배열로 표현하는 방법이다.
+
+- `1` : 두 정점이 연결됨
+- `0` : 두 정점이 연결되지 않음
+- 행과 열을 이용해 정점 사이의 관계 확인
+
+### 핵심 정리
+- 그래프는 정점(Vertex)과 간선(Edge)으로 구성된다.
+- 인접 행렬은 2차원 리스트로 연결 관계를 표현한다.
+- `0`은 연결되지 않음, `1`은 연결됨을 의미한다.
+- 무방향 그래프는 연결 관계가 양쪽 방향으로 표시된다.
+
 ## 11월 12일
 
 ### 1. 이진 트리(Binary Tree)의 개념
