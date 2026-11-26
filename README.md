@@ -1,5 +1,195 @@
 # 신성오 202630112
 
+## 11월 26일
+
+### 1. 재귀 함수(Recursive Function)
+재귀 함수는 함수 내부에서 자기 자신을 다시 호출하는 함수이다.
+반복 작업을 함수 호출로 처리할 수 있다.
+
+- 재귀 호출 : 함수가 자기 자신을 호출하는 것
+- 종료 조건 : 재귀 호출을 멈추는 조건
+- 종료 조건이 없으면 무한 호출이 발생할 수 있다.
+
+### 2. Callback 함수
+자기 자신을 다시 호출하여 숫자를 하나씩 감소시키는 재귀 함수이다.
+
+```python
+def callback(num):
+    num -= 1
+    if num == 0:
+        print("Count reached zero. Stopping execution.")
+        return
+    print("Callback function executed. count", num)
+    callback(num)
+    print("Callback function executed. count", num)
+
+callback(3)
+```
+
+- `num -= 1` : 숫자를 1 감소
+- `num == 0` : 재귀 호출 종료 조건
+- `callback(num)` : 자기 자신을 다시 호출
+- 마지막 `print()` : 재귀 호출이 끝난 후 실행
+
+### 3. 재귀 함수를 이용한 합계 계산
+1부터 10까지 숫자를 재귀 호출로 더하는 함수이다.
+
+```python
+def add_numbers(start, end):
+    if end <= start:
+        return -1
+    return end + add_numbers(start, end-1)
+
+print(add_numbers(1, 10))
+```
+
+- `end <= start` : 재귀 호출 종료 조건
+- `end + add_numbers()` : 현재 숫자와 이전 숫자의 합
+- `end-1` : 끝 숫자를 하나씩 감소
+
+### 4. 반복문을 이용한 합계 계산
+등차수열의 합 공식으로 합계를 계산한다.
+
+```python
+def add_numbers(start, end):
+    foo = ((start + end) * end) / 2
+    print("woo:", foo)
+
+add_numbers(1, 100000)
+```
+
+- `(start + end) * end / 2` : 등차수열의 합 공식
+- 반복 호출 없이 공식으로 합계 계산
+
+### 5. 팩토리얼(Factorial)
+팩토리얼은 1부터 특정 숫자까지 모두 곱하는 계산이다.
+재귀 함수를 이용해 숫자를 하나씩 감소시키며 계산한다.
+
+```python
+def factorial(n):
+    if n == 1:
+        print("n:", n)
+        return 1
+    print("n:", n)
+    foo = factorial(n-1)
+    print("n:", n)
+    return n * foo
+
+print(factorial(5))
+```
+
+- `n == 1` : 재귀 호출 종료 조건
+- `factorial(n-1)` : 이전 숫자의 팩토리얼 호출
+- `n * foo` : 현재 숫자와 이전 결과를 곱함
+
+### 6. 카운트다운
+재귀 함수와 반복문으로 숫자를 감소시키며 출력할 수 있다.
+
+**재귀 함수 방식**
+
+```python
+def countdown(n):
+    if n == 0:
+        print("발사!!!")
+        return
+    print(n)
+    countdown(n-1)
+```
+
+- `n == 0` : 카운트다운 종료 조건
+- `countdown(n-1)` : 숫자를 하나씩 감소
+
+**반복문 방식**
+
+```python
+def countdown(n):
+    for i in range(n, 0, -1):
+        print(i)
+    print("발사!!!")
+
+countdown(5)
+```
+
+- `range(n, 0, -1)` : n부터 1까지 1씩 감소
+- 반복문을 이용해 카운트다운 실행
+
+### 7. 별 출력하기
+재귀 호출이 끝난 후 별을 출력하여 줄마다 별의 개수를 증가시킨다.
+
+```python
+def print_start(n):
+    if n == 0:
+        return
+    print_start(n-1)
+    print("*" * n)
+
+print_start(5)
+```
+
+- `n == 0` : 재귀 호출 종료 조건
+- `print_start(n-1)` : 이전 단계 먼저 실행
+- `"*" * n` : 숫자만큼 별 출력
+
+### 8. 구구단 출력
+반복문을 중첩하여 1단부터 9단까지 출력한다.
+
+```python
+def multiplication_table():
+    for i in range(1, 10):
+        for j in range(1, 10):
+            print(f"{i} * {j} = {i * j:2}")
+    print()
+
+multiplication_table()
+```
+
+- 바깥쪽 `for` : 구구단의 단을 결정
+- 안쪽 `for` : 각 단의 곱하는 숫자 결정
+- `i * j` : 곱셈 결과 계산
+- `:2` : 결과를 두 칸 너비로 출력
+
+### 9. 거듭제곱 계산
+재귀 함수를 이용해 밑의 숫자를 지수만큼 곱한다.
+
+```python
+def power(base, exponent):
+    if exponent == 0:
+        return 1
+    return base * power(base, exponent - 1)
+
+print(power(2, 4))
+```
+
+- `exponent == 0` : 재귀 호출 종료 조건
+- `base * power()` : 밑의 숫자를 반복해서 곱함
+- `exponent - 1` : 지수를 하나씩 감소
+
+### 10. 배열의 합계 계산
+재귀 함수를 이용해 배열의 마지막 요소부터 차례대로 더한다.
+
+```python
+def arr_sum(arr, n):
+    if n <= 0:
+        return 0
+    return arr[n - 1] + arr_sum(arr, n - 1)
+
+arr = [1, 2, 3, 4, 5]
+print(arr_sum(arr, 5))
+```
+
+- `n <= 0` : 재귀 호출 종료 조건
+- `arr[n - 1]` : 배열의 마지막 요소
+- `arr_sum(arr, n - 1)` : 이전 요소들의 합 계산
+
+### 핵심 정리
+- 재귀 함수는 자기 자신을 다시 호출하는 함수이다.
+- 종료 조건이 있어야 재귀 호출이 멈춘다.
+- 재귀 호출 후에는 호출한 위치로 돌아와 남은 코드를 실행한다.
+- 반복문으로도 구현할 수 있는 작업을 재귀 함수로 표현할 수 있다.
+- 팩토리얼, 거듭제곱, 배열 합계 등에 활용할 수 있다.
+
+
+
 ## 11월 19일
 
 ### 1. 그래프(Graph)의 기본 개념
